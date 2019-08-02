@@ -22,7 +22,7 @@ script:
 
 after_success:
   - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
-  - bash upload.sh olivia*.AppImage*
+  - bash upload.sh Olivia*.AppImage*
   
 branches:
   except:
