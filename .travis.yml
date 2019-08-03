@@ -15,12 +15,15 @@ script:
   - qmake CONFIG+=release PREFIX=/usr
   - make -j$(nproc)
   - make INSTALL_ROOT=appdir -j$(nproc) install ; find appdir/
-  - wget -c -nv "https://github.com/probonopd/olivia/releases/download/mpv/mpv" -O appdir/usr/bin/mpv ; chmod +x appdir/usr/bin/mpv # FIXME
+  - wget -c -nv "https://github.com/probonopd/olivia/releases/download/mpv/mpv" -O mpv ; chmod +x ./mpv # FIXME
   - wget -c -nv "https://yt-dl.org/downloads/latest/youtube-dl -O appdir/usr/bin/youtube-dl" ; chmod +x appdir/usr/bin/youtube-dl 
   - wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
+  - ./mpv --appimage-extract
+  - rm ./squashfs-root/usr/share/applications/*.desktop
+  - cp -Rf ./appdir ./squashfs-root
   - chmod a+x linuxdeployqt-continuous-x86_64.AppImage
   - unset LD_LIBRARY_PATH
-  - ./linuxdeployqt-continuous-x86_64.AppImage appdir/usr/share/applications/*.desktop -appimage
+  - ./linuxdeployqt-continuous-x86_64.AppImage squashfs-root/usr/share/applications/*.desktop -appimage
 
 after_success:
   - wget -c https://github.com/probonopd/uploadtool/raw/master/upload.sh
