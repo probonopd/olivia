@@ -20,7 +20,8 @@ script:
   - wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
   - ./mpv --appimage-extract
   - rm ./squashfs-root/usr/share/applications/*.desktop
-  - cp -Rf ./appdir ./squashfs-root
+  - cp -Rf ./appdir/* ./squashfs-root
+  - find ./squashfs-root
   - chmod a+x linuxdeployqt-continuous-x86_64.AppImage
   - unset LD_LIBRARY_PATH
   - ./linuxdeployqt-continuous-x86_64.AppImage squashfs-root/usr/share/applications/*.desktop -appimage
