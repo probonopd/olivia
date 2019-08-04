@@ -20,7 +20,7 @@ script:
   - make -j$(nproc)
   - make INSTALL_ROOT=appdir -j$(nproc) install ; find appdir/
   - mkdir -p appdir/usr/bin ; cp ./out/mpv*AppImage appdir/usr/bin/mpv
-  - wget -c -nv "https://yt-dl.org/downloads/latest/youtube-dl -O appdir/usr/bin/youtube-dl" ; chmod +x appdir/usr/bin/youtube-dl 
+  - wget -c -nv "https://yt-dl.org/downloads/latest/youtube-dl" -O appdir/usr/bin/youtube-dl ; chmod +x appdir/usr/bin/youtube-dl 
   # wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
   - wget -c -nv "https://github.com/AppImage/AppImageKit/releases/download/continuous/AppRun-x86_64" -O ./appdir/AppRun ; chmod +x ./appdir/AppRun
   - chmod a+x linuxdeployqt-continuous-x86_64.AppImage
