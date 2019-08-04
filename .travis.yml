@@ -13,6 +13,8 @@ install:
 
 script:
   # FIXME: Olivia needs mpv, and since the mpv project does not provide an AppImage yet, we are going to make a quick and dirty one
+  # this is incredibly wasteful, as this mpv was built with --extra-cflags='-I/build/mpv-KeaQK0/mpv-0.29.1+git3~trusty/build_libs/include' --extra-ldflags='-L/build/mpv-KeaQK0/mpv-0.29.1+git3~trusty/build_libs/lib' --extra-libs=-ldl --prefix='/build/mpv-KeaQK0/mpv-0.29.1+git3~trusty/build_libs' --enable-static --disable-shared --enable-gpl --disable-debug --disable-doc --disable-programs --enable-libass --enable-libbs2b --enable-gcrypt --enable-libgme --enable-libgsm --enable-libmodplug --enable-ladspa --enable-libsoxr --enable-libssh --enable-openssl --enable-libdav1d --enable-libx264 --enable-libxvid --enable-nonfree --enable-libfdk-aac --enable-libvorbis --enable-libmp3lame --enable-libopus --enable-libvpx --enable-libwavpack --enable-libtheora --enable-libtwolame --enable-libspeex
+  # Possibly we would better compile our own, minimal one, which could also share the same Qt instance with Olivia
   - wget -c -nv https://raw.githubusercontent.com/AppImage/pkg2appimage/master/pkg2appimage
   - bash -ex pkg2appimage mpv.yml
   # Olivia
