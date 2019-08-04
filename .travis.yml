@@ -12,12 +12,16 @@ install:
   - source /opt/qt*/bin/qt*-env.sh
 
 script:
+  # FIXME: Olivia needs mpv, and since the mpv project does not provide an AppImage yet, we are going to make a quick and dirty one
+  - wget -c -nv https://raw.githubusercontent.com/AppImage/pkg2appimage/master/pkg2appimage
+  - bash -ex pkg2appimage mpv.yml
+  # Olivia
   - qmake CONFIG+=release PREFIX=/usr
   - make -j$(nproc)
   - make INSTALL_ROOT=appdir -j$(nproc) install ; find appdir/
-  - wget -c -nv "https://github.com/probonopd/olivia/releases/download/mpv/mpv" -O mpv ; chmod +x ./mpv # FIXME
+  - mkdir -p appdir/usr/bin ; cp mpv*AppImage appdir/usr/bin/mpv
   - wget -c -nv "https://yt-dl.org/downloads/latest/youtube-dl -O appdir/usr/bin/youtube-dl" ; chmod +x appdir/usr/bin/youtube-dl 
-  - wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
+  # wget -c -nv "https://github.com/probonopd/linuxdeployqt/releases/download/continuous/linuxdeployqt-continuous-x86_64.AppImage"
   - ./mpv --appimage-extract
   - rm ./squashfs-root/usr/share/applications/*.desktop
   - cp -Rf ./appdir/* ./squashfs-root
